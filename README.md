@@ -1,0 +1,271 @@
+# 🌱 EcoTask — Plataforma de Tarefas Sustentáveis
+
+O **EcoTask** é um sistema completo para gerenciamento de tarefas e missões sustentáveis, com gamificação, segurança, paginação, cache, internacionalização, IA generativa e deploy em nuvem.
+
+Ele foi desenvolvido utilizando **Java + Spring Boot**, seguindo as melhores práticas de arquitetura REST, segurança com JWT, persistência com Spring Data JPA e integração com IA usando **Spring AI + LangChain4J**.
+
+---
+
+# 📌 Índice
+
+1. [Principais Funcionalidades](#-principais-funcionalidades)
+2. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+3. [Arquitetura do Projeto](#-arquitetura-do-projeto)
+4. [Configuração do Ambiente](#-configuração-do-ambiente)
+5. [Banco de Dados (PostgreSQL)](#-banco-de-dados-postgresql)
+6. [Autenticação e Segurança (JWT)](#-autenticação-e-segurança-jwt)
+7. [Internacionalização (i18n)](#-internacionalização-i18n)
+8. [Caching](#-caching)
+9. [Validações (Bean Validation)](#-validações-bean-validation)
+10. [Paginação](#-paginação)
+11. [Tratamento de erros](#-tratamento-de-erros)
+12. [IA Ambiental (Spring AI)](#-ia-ambiental-spring-ai)
+13. [Coleção de Endpoints](#-coleção-de-endpoints)
+14. [Como Rodar o Projeto](#-como-rodar-o-projeto)
+15. [Deploy em Nuvem](#-deploy-em-nuvem)
+16. [Integrantes](#-integrantes-do-projeto)
+
+---
+
+# ✨ Principais Funcionalidades
+
+✔ CRUD completo para:
+- Usuários  
+- Tarefas Sustentáveis  
+- Categorias  
+- Missões  
+- Recompensas  
+
+✔ Autenticação e autorização com **Spring Security + JWT**  
+✔ Validações com **Bean Validation**  
+✔ Paginação nativa com Spring Data  
+✔ Internacionalização (i18n) — **pt-BR** e **en-US**  
+✔ Cache para otimizar desempenho  
+✔ Tratamento global de erros  
+✔ IA generativa especializada em sustentabilidade  
+✔ API REST seguindo boas práticas  
+✔ Deploy em nuvem (Render)
+
+---
+
+# 🧪 Tecnologias Utilizadas
+
+- **Java 17**
+- **Spring Boot 3**
+- Spring Data JPA  
+- Spring Security + JWT  
+- Spring Cache  
+- Spring Validation  
+- Spring AI  
+- LangChain4J  
+- PostgreSQL  
+- Maven  
+
+---
+
+# 🗂 Arquitetura do Projeto
+
+src/main/java/com/example/demo
+├── controller
+├── service
+│ ├── ia
+├── repository
+├── domain
+│ ├── model
+│ └── dto
+├── config
+├── exception
+├── security
+└── EcoTaskApplication.java
+
+yaml
+Copiar código
+
+---
+
+# 🛠 Configuração do Ambiente
+
+No arquivo `application.properties`:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/ecotask
+spring.datasource.username=postgres
+spring.datasource.password=senha
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+📌 Banco utilizado: PostgreSQL
+
+🔐 Autenticação e Segurança (JWT)
+A autenticação usa o prefixo /auth.
+
+Endpoints públicos
+bash
+Copiar código
+POST /auth/register
+POST /auth/login
+Após o login, você recebe um token JWT:
+
+makefile
+Copiar código
+Authorization: Bearer SEU_TOKEN
+Endpoints protegidos
+Todos os outros endpoints exigem:
+
+✔ Autenticação
+✔ Role ADMIN
+🌎 Internacionalização (i18n)
+Suporte a duas línguas:
+
+Português (padrão)
+
+Inglês
+
+Arquivos:
+
+matlab
+Copiar código
+messages.properties
+messages_en.properties
+Para alterar a linguagem no Postman:
+
+makefile
+Copiar código
+Accept-Language: en-US
+⚡ Caching
+Implementado com:
+
+java
+Copiar código
+@Cacheable
+@CacheEvict
+@Caching
+O cache melhora o desempenho em consultas frequentes.
+
+✔ Validações (Bean Validation)
+Usando anotações como:
+
+@NotBlank
+
+@Size
+
+@Email
+
+@NotNull
+
+@Positive
+
+📄 Paginação
+Endpoints com paginação seguem o formato padrão Spring:
+
+arduino
+Copiar código
+GET /tarefas?page=0&size=10
+🚫 Tratamento Global de Erros
+Retorno padrão:
+
+json
+Copiar código
+{
+  "status": 400,
+  "message": "Campo inválido",
+  "details": "O nome não pode ser vazio"
+}
+🤖 IA Ambiental (Spring AI)
+Endpoint
+bash
+Copiar código
+POST /api/assistant
+Como usar no Postman
+Body JSON:
+
+json
+Copiar código
+{
+  "message": "Me dê uma dica para economizar energia."
+}
+A IA responderá automaticamente.
+
+Serviço utilizado
+java
+Copiar código
+@AiService
+public interface AssistantAiService {
+
+    @SystemMessage("""
+        Você é uma inteligência artificial especializada em ajudar os usuários...
+        """)
+    Result<String> handleRequest(@UserMessage String userMessage);
+}
+A IA é treinada para falar exclusivamente sobre sustentabilidade.
+
+🔗 Coleção de Endpoints
+🔐 Autenticação
+bash
+Copiar código
+POST /auth/register
+POST /auth/login
+👤 Usuários (somente ADMIN)
+bash
+Copiar código
+GET    /usuarios
+GET    /usuarios/{id}
+POST   /usuarios
+PUT    /usuarios/{id}
+DELETE /usuarios/{id}
+📝 Tarefas
+bash
+Copiar código
+GET    /tarefas
+POST   /tarefas
+PUT    /tarefas/{id}
+DELETE /tarefas/{id}
+🏷 Categorias
+bash
+Copiar código
+GET    /categorias
+POST   /categorias
+PUT    /categorias/{id}
+DELETE /categorias/{id}
+🗺 Missões
+bash
+Copiar código
+GET    /missoes
+POST   /missoes
+PUT    /missoes/{id}
+DELETE /missoes/{id}
+🎁 Recompensas
+bash
+Copiar código
+GET    /recompensas
+POST   /recompensas
+PUT    /recompensas/{id}
+DELETE /recompensas/{id}
+🤖 IA Ambiental
+bash
+Copiar código
+POST /api/assistant
+▶ Como Rodar o Projeto
+1. Clonar o repositório
+bash
+Copiar código
+git clone https://github.com/felipegresele/ecotask-java
+2. Criar o banco no PostgreSQL
+pgsql
+Copiar código
+CREATE DATABASE ecotask;
+3. Rodar a aplicação
+arduino
+Copiar código
+mvn spring-boot:run
+☁ Deploy em Nuvem (Render)
+
+Link do deploy do projeto:  
+
+Configurar variáveis de ambiente
+
+👨‍💻 Integrantes do Projeto
+Nome	RM
+Felipe Horta Gresele	RM556955
+Arthur Cardoso Carinhanha	RM550615
+João Henrique Dias	RM556221
