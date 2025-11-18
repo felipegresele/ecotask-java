@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/tarefas/**", "/categorias/**", "/usuarios", "/usuarios/**", "/recompensas", "/recompensas/**", "/missoes", "/missoes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/tarefas/**", "/categorias/**", "/usuarios", "/usuarios/**", "/recompensas", "/recompensas/**", "/missoes", "/missoes/**").hasRole("ADMIN")
                         // Operações de leitura (GET) precisam apenas de autenticação
-                        .requestMatchers(HttpMethod.GET, "/tarefas", "/tarefas/**", "/categorias", "/categorias/**", "/usuarios", "/usuarios/**", "/recompensas", "/recompensas/**", "/missoes", "/missoes/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/tarefas", "/tarefas/**", "/categorias", "/categorias/**", "/usuarios", "/usuarios/**", "/recompensas", "/recompensas/**", "/missoes", "/missoes/**", "/api/v1/plano-missao").authenticated()
                         // Qualquer outra requisição precisa de autenticação
                         .anyRequest().authenticated())
                 .httpBasic(httpBasic -> httpBasic.disable()) // Desabilita HTTP Basic
